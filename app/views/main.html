@@ -59,7 +59,10 @@ var arc = d3.svg.arc()
     .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 
 d3.json("data/wheel.json", function(error, json) {
-  var nodes = partition.nodes({children: json});
+
+  var data = buildObj(json);
+
+  var nodes = partition.nodes(data);
 
   var path = vis.selectAll("path").data(nodes);
   path.enter().append("path")
@@ -124,6 +127,20 @@ d3.json("data/wheel.json", function(error, json) {
         });
   }
 });
+
+function buildObj(node){
+  var obj = {
+    name = node.GivenNames + ' ' + node.Surnames
+    children: []
+  };
+  if(node.father){
+    obj.children.push(buildObj(node.father));
+  }
+  if(node.mother){
+    obj.children.push(buildObj(node.mother));
+  }
+  return obj;
+}
 
 function isParentOf(p, c) {
   if (p === c) return true;

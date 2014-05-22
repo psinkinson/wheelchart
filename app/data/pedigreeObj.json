@@ -1,6 +1,12 @@
 {
     GivenNames: 'Paul',
     Surnames: 'Sinkinson',
-    father: null,
-    mother: null
+    father: {
+        GivenNames: 'Michael',
+        Surnames: 'Sinkinson'
+    },
+    mother: {
+        GivenNames: 'Carmen',
+        Surnames: 'Busuttil'
+    }
 }

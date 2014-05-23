@@ -9,6 +9,14 @@ angular.module('wheelchartApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/sunburst', {
+        templateUrl: 'views/sunburst.html',
+        controller: 'MainCtrl'
+      })
+      .when('/wheel', {
+        templateUrl: 'views/wheelchart.html',
+        controller: 'MainCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -1,10 +1,25 @@
 angular.module('wheelchartApp')
-    .directive('wheelChart', [function(){
+    .directive('sunburstChart', [function(){
         'use strict';
+
+        function buildObj(node){
+		  console.log('buildObj', node);
+		  var obj = {
+		    name: node.GivenNames + ' ' + node.Surnames,
+		    children: []
+		  };
+		  if(node.father){
+		    obj.children.push(buildObj(node.father));
+		  }
+		  if(node.mother){
+		    obj.children.push(buildObj(node.mother));
+		  }
+		  return obj;
+		}
 
         return {
             scope: {
-	            pedigreeData: '=wheelChart'
+	            pedigreeData: '=sunburstChart'
 	        },
             link: function(scope, element, attrs, ngModel){
 
@@ -19,7 +34,7 @@ angular.module('wheelchartApp')
 				    y = d3.scale.pow().exponent(1.3).domain([0, 1]).range([0, radius]),
 				    padding = 5,
 				    generationSpacing = 5,
-				    
+
 				    duration = 1000;
 
 				var div = d3.select(element[0]);
@@ -110,20 +125,7 @@ angular.module('wheelchartApp')
 				        });
 				  }
 
-				function buildObj(node){
-				  console.log('buildObj', node);
-				  var obj = {
-				    name: node.GivenNames + ' ' + node.Surnames,
-				    children: []
-				  };
-				  if(node.father){
-				    obj.children.push(buildObj(node.father));
-				  }
-				  if(node.mother){
-				    obj.children.push(buildObj(node.mother));
-				  }
-				  return obj;
-				}
+				
 
 				function isParentOf(p, c) {
 				  if (p === c) return true;

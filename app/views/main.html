@@ -7,7 +7,7 @@
 	<h3 class="text-muted">wheelchart</h3>
 </div>
 
-	<div id="vis"></div>
+	<div wheel-chart="pedigreeObj"></div>
 
 <div class="row marketing">
 	<h4>HTML5 Boilerplate</h4>
@@ -58,10 +58,16 @@ var arc = d3.svg.arc()
     .innerRadius(function(d) { return Math.max(0, d.y ? y(d.y) : d.y); })
     .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 
-d3.json("data/wheel.json", function(error, json) {
 
+
+
+
+    
+
+d3.json("data/pedigreeObj.json", function(error, json) {
+console.log('json', json);
   var data = buildObj(json);
-
+console.log(data);
   var nodes = partition.nodes(data);
 
   var path = vis.selectAll("path").data(nodes);
@@ -129,8 +135,9 @@ d3.json("data/wheel.json", function(error, json) {
 });
 
 function buildObj(node){
+  console.log('buildObj', node);
   var obj = {
-    name = node.GivenNames + ' ' + node.Surnames
+    name: node.GivenNames + ' ' + node.Surnames,
     children: []
   };
   if(node.father){

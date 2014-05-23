@@ -19,6 +19,7 @@ angular.module('wheelchartApp')
 				    y = d3.scale.pow().exponent(1.3).domain([0, 1]).range([0, radius]),
 				    padding = 5,
 				    generationSpacing = 5,
+				    
 				    duration = 1000;
 
 				var div = d3.select(element[0]);
@@ -135,14 +136,14 @@ angular.module('wheelchartApp')
 				}
 
 				function colour(d) {
-				  if (d.children) {
-				    // There is a maximum of two children!
-				    var colours = d.children.map(colour),
-				        a = d3.hsl(colours[0]),
-				        b = d3.hsl(colours[1]);
-				    // L*a*b* might be better here...
-				    return d3.hsl((a.h + b.h) / 2, a.s * 1.2, a.l / 1.2);
-				  }
+				  // if (d.children) {
+				  //   // There is a maximum of two children!
+				  //   var colours = d.children.map(colour),
+				  //       a = d3.hsl(colours[0]),
+				  //       b = d3.hsl(colours[1]);
+				  //   // L*a*b* might be better here...
+				  //   return d3.hsl((a.h + b.h) / 2, a.s * 1.2, a.l / 1.2);
+				  // }
 				  return d.colour || "#fff";
 				}
 
